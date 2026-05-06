@@ -5190,6 +5190,7 @@ class AutoTestPlane(vehicle_test_suite.TestSuite):
         )
         self.set_parameters({
             "ARSPD_USE": 0.0,
+            "TKOFF_LVL_ALT": 30,
         })
         self.change_mode("TAKEOFF")
 
@@ -5233,7 +5234,7 @@ class AutoTestPlane(vehicle_test_suite.TestSuite):
         self.change_mode("TAKEOFF")
 
         # waiting for the EKF to be happy won't work
-        self.delay_sim_time(20)
+        self.wait_prearm_sys_status_healthy()
         self.arm_vehicle()
 
         target_alt = self.get_parameter("TKOFF_ALT")
